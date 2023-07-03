@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from './styles.module.scss'
-import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 
 
@@ -18,10 +17,11 @@ export default function Login() {
             <div className={styles.containerCenter}>
                 <Image src="/FatiaPizza.svg" alt='Logo Fatia de Pizza' width={200} height={200} />
                 <div className={styles.containerLogin}>
+                    <h1>Login</h1>
                     <form >
-                        {/*INPUT VAI AKI */}
-
-                        {/*BUTTON VAI AKI */}
+                        <input type="email" name='email' placeholder='Seu email'></input>
+                        <input type="password" name='password' placeholder='Sua senha'></input>
+                        <button type="submit"  > Acessar</button>
                     </form>
                     <Link href={'/registrar'}> Não possui uma conta? Cadastre-se</Link>
                 </div>

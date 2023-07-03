@@ -1,5 +1,5 @@
 import { RegistroContent } from "./RegistroContent";
-import { RegistroRoot } from "./registroroot";
+import { RegistroRoot } from "./RegistroRoot";
 
 export const Registro = {
     Root: RegistroRoot,
