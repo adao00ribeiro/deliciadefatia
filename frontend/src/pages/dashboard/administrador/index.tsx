@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from './styles.module.scss'
 import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { Header } from '../../../Components/Header'
+import { SideBar } from '../../../Components/sidebar'
 
 
 
@@ -16,22 +17,25 @@ export default function DashboardAdmin() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div>
+
+            <div className={styles.container}>
                 <Header />
-                <main>
-                    <div>
-                        <h1>Ultimos pedidos</h1>
-                        <button>
 
-                        </button>
+                <div className={styles.containerMain}>
+                    <SideBar />
+                    <div className={styles.containerRight}>
+                        <div>
+                            <h1>Dashboard</h1>
+                            <button>
+                            </button>
+                        </div>
+
+                        <article>
+
+                        </article>
                     </div>
-
-                    <article>
-
-                    </article>
-
-                </main>
-            </div>
+                </div>
+            </div >
         </>
     )
 }

@@ -1,11 +1,11 @@
-import { useContext } from "react"; 
+import { useContext } from "react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { FiLogOut } from 'react-icons/fi'
 
 
 export function Header() {
-     
+
     return (
         < header className={styles.headerContainer}>
             <div className={styles.headerContent}>
@@ -14,7 +14,7 @@ export function Header() {
                 </Link>
                 <nav className={styles.menuNav}>
                     <Link href="/category">
-                     Categoria
+                        Categoria
                     </Link>
                     <Link href="/product">
                         Cardapio
