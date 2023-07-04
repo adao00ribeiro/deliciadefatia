@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
 import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
-import { Header } from '../../Components/Header'
+import { Header } from '../../../Components/Header'
 
 
 
-export default function Dashboard() {
+
+export default function DashboardAdmin() {
 
     return (
         <>
