@@ -1,5 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { User } from '@prisma/client';
+import { CurrentUser } from './auth/decorators/current-user.decorator';
 
 @Controller()
 export class AppController {
@@ -8,5 +10,9 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+  @Get('/me')
+  getMe(@CurrentUser() currentUser: User) {
+    return currentUser;
   }
 }
