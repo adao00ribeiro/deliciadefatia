@@ -2,16 +2,22 @@ import { useContext } from "react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { FiLogOut } from 'react-icons/fi'
-
+import { FaBars } from 'react-icons/fa'
 
 export function Header() {
 
     return (
         < header className={styles.headerContainer}>
             <div className={styles.headerContent}>
+                <div className={styles.headerLeft}>
+                <button className={styles.btnHamburguer} >
+                    <FaBars size={50}></FaBars>
+                </button>
                 <Link href="/dashboard">
-                    <img src="/logo.svg" width={190} height={60}></img>
+                   Delicia de Fatia
                 </Link>
+                </div>
+               
                 <nav className={styles.menuNav}>
                     <Link href="/category">
                         Categoria
