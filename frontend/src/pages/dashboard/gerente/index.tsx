@@ -10,6 +10,8 @@ import { CadastrarFuncionario } from '../../../Components/CadastrarFuncionario'
 
 export default function DashboardGerente() {
 
+
+
     return (
         <>
             <Head>
@@ -21,12 +23,9 @@ export default function DashboardGerente() {
 
             <div className={styles.container}>
                 <Header />
-
                 <div className={styles.containerMain}>
                     <SideBar />
-                    <div className={styles.containerRight}>
-                        <CadastrarFuncionario />
-                    </div>
+                    <CadastrarFuncionario />
                 </div>
             </div >
         </>

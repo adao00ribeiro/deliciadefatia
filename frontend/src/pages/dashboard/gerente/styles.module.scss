@@ -7,13 +7,6 @@
 .containerMain {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
     height: 100%;
-}
-
-.containerRight {
-   width: 100%;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   color: white;
 }

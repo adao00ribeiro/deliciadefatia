@@ -4,15 +4,20 @@ import styles from "./styles.module.scss";
 import { FiLogOut } from 'react-icons/fi'
 
 
-export function SideBar() { 
+export function SideBar() {
+
+
+
+
+
     const mostrarOpcoes = () => {
         var opcoes = document.getElementById("opcoes");
         if (opcoes.style.display === "none") {
-          opcoes.style.display = "block"; // Mostra as opções
+            opcoes.style.display = "block"; // Mostra as opções
         } else {
-          opcoes.style.display = "none"; // Esconde as opções
+            opcoes.style.display = "none"; // Esconde as opções
         }
-      }
+    }
     return (
         < aside className={styles.side}>
             <nav className={styles.nav}>
@@ -20,7 +25,7 @@ export function SideBar() {
                     <li>
                         <Link href={""} onClick={mostrarOpcoes}>
                             Cadastrar
-                            </Link>
+                        </Link>
                         <div id="opcoes" className={styles.opcoes}>
                             <p>Funcionario</p>
                             <p>Categorias</p>
@@ -30,12 +35,8 @@ export function SideBar() {
                     <li>
                         <Link href={""}  >Caixa</Link>
                     </li>
-                    <li>
-                        <Link href={""}   >Categorias</Link>
-                    </li>
-                    <li>
-                        <Link href={""}   >Produtos</Link>
-                    </li>
+
+
                     <li>
                         <Link href={""}   >Pedidos</Link>
                     </li>
