@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 import Link from 'next/link'
+import Button from '../../Components/ui/Button'
 
 
 export default function Login() {
@@ -21,7 +22,7 @@ export default function Login() {
                     <form >
                         <input type="email" name='email' placeholder='Seu email'></input>
                         <input type="password" name='password' placeholder='Sua senha'></input>
-                        <button type="submit"  > Acessar</button>
+                        <Button type='submit'>Acessar</Button>
                     </form>
                     <Link href={'/registrar'}> Não possui uma conta? Cadastre-se</Link>
                 </div>

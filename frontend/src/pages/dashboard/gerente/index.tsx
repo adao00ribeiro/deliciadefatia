@@ -4,6 +4,9 @@ import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from '
 import { Header } from '../../../Components/Header'
 import { SideBar } from '../../../Components/sidebar'
 import { CadastrarFuncionario } from '../../../Components/CadastrarFuncionario'
+import { CadastrarCategoria } from '../../../Components/CadastrarCategoria'
+import { CadastrarProduto } from '../../../Components/CadastrarProduto'
+import Caixa from '../../../Components/Caixa'
 
 
 

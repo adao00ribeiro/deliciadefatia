@@ -1,10 +1,9 @@
-.containerCategoria {
+.containerCadastrar {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
     color: white;
-    border: 1px solid red;
 }
 
 .form {
@@ -12,13 +11,7 @@
     display: flex;
     flex-direction: column;
 
-    input,
-    select {
-        width: 100%;
-        padding: 5px;
-        border-radius: 3px;
-        border: 1px solid #ccc;
-    }
+
 
     input[type="submit"] {
         background-color: #4CAF50;
@@ -35,4 +28,18 @@
     }
 }
 
-.group {}
+.group {
+    label {
+        font-weight: bold;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 5px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+    }
+
+
+}

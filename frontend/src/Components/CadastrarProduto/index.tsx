@@ -7,7 +7,7 @@ export function CadastrarProduto() {
 
     return (
         <div className={styles.containerCadastrar}>
-            <h1>Cadastrar Funcionário</h1>
+            <h1>Novo Produto</h1>
             <form className={styles.form}>
                 <div className={styles.group}>
                     <label htmlFor="nome">Nome:</label>
