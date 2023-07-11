@@ -3,9 +3,11 @@ import Image from 'next/image'
 import styles from './styles.module.scss'
 import Link from 'next/link'
 import Button from '../../Components/ui/Button'
-
+import useUser from '../../Store/useUser'
 
 export default function Login() {
+
+    const email = useUser((state) => state.email);
 
     return (
         <>
@@ -18,7 +20,7 @@ export default function Login() {
             <div className={styles.containerCenter}>
                 <Image src="/FatiaPizza.svg" alt='Logo Fatia de Pizza' width={200} height={200} />
                 <div className={styles.containerLogin}>
-                    <h1>Login</h1>
+                    <h1>{email}</h1>
                     <form >
                         <input type="email" name='email' placeholder='Seu email'></input>
                         <input type="password" name='password' placeholder='Sua senha'></input>

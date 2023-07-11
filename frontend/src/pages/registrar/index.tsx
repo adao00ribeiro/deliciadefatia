@@ -2,7 +2,6 @@ import Head from 'next/head'
 import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { Registro } from '../../Components/registro'
 import Image from 'next/image';
-import Link from 'next/link';
 import styles from './styles.module.scss'
 
 export default function Registrar() {

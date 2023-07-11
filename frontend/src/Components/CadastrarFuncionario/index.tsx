@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 
 
 export function CadastrarFuncionario() {
@@ -10,11 +12,9 @@ export function CadastrarFuncionario() {
             <h1>Cadastrar Funcionário</h1>
             <form className={styles.form}>
                 <div className={styles.group}>
-                    <label htmlFor="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" required /><br /><br />
+                    <Input type="text" id="nome" name="nome" placeholder="Nome" required /><br /><br />
                 </div>
                 <div className={styles.group}>
-                    <label htmlFor="cargo">Cargo:</label>
                     <select id="cargo" name="cargo" required>
                         <option value="">Selecione o cargo</option>
                         <option value="gerente">Gerente</option>
@@ -24,14 +24,12 @@ export function CadastrarFuncionario() {
                     </select><br /><br />
                 </div>
                 <div className={styles.group}>
-                    <label htmlFor="email">E-mail:</label>
-                    <input type="email" id="email" name="email" required /><br /><br />
+                    <Input type="email" id="email" name="email" placeholder="Email" required /><br /><br />
                 </div>
                 <div className={styles.group}>
-                    <label htmlFor="telefone">Telefone:</label>
-                    <input type="tel" id="telefone" name="telefone" required /><br /><br />
+                    <Input type="tel" id="telefone" name="telefone" placeholder="Telefone" required /><br /><br />
                 </div>
-                <input type="submit" value="Cadastrar" />
+                <Button>Cadastrar</Button>
             </form>
         </div>
     )
