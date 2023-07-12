@@ -3,18 +3,20 @@ import styles from './styles.module.scss'
 import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { Header } from '../../../Components/Header'
 import { SideBar } from '../../../Components/sidebar'
+import useCurrentScreen from '../../../Store/useCurrentScreen'
+import { ECurrentScreen } from '../../../enums/ECurrentScreen'
 import { CadastrarFuncionario } from '../../../Components/CadastrarFuncionario'
 import { CadastrarCategoria } from '../../../Components/CadastrarCategoria'
 import { CadastrarProduto } from '../../../Components/CadastrarProduto'
 import Caixa from '../../../Components/Caixa'
+import Pedidos from '../../../Components/Pedidos'
 
 
 
 
 export default function DashboardGerente() {
-
-
-
+    const currentScreen = useCurrentScreen(state => state.current)
+    console.log(currentScreen)
     return (
         <>
             <Head>
@@ -28,7 +30,22 @@ export default function DashboardGerente() {
                 <Header />
                 <div className={styles.containerMain}>
                     <SideBar />
-                    <CadastrarFuncionario />
+                    {currentScreen == ECurrentScreen.CADASTROFUNCIONARIO &&
+                        <CadastrarFuncionario></CadastrarFuncionario>
+                    }
+                    {currentScreen == ECurrentScreen.CADASTROCATEGORIA &&
+                        <CadastrarCategoria></CadastrarCategoria>
+                    }
+                    {currentScreen == ECurrentScreen.CADASTROPRODUTO &&
+                        <CadastrarProduto></CadastrarProduto>
+                    }
+                    {currentScreen == ECurrentScreen.CAIXA &&
+                        <Caixa></Caixa>
+                    }
+                    {currentScreen == ECurrentScreen.PEDIDOS &&
+                        <Pedidos></Pedidos>
+                    }
+
                 </div>
             </div >
         </>

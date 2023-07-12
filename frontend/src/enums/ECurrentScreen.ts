@@ -1,0 +1,8 @@
+export enum ECurrentScreen {
+    DEFAULT,
+    CADASTROFUNCIONARIO,
+    CADASTROCATEGORIA,
+    CADASTROPRODUTO,
+    CAIXA,
+    PEDIDOS
+}

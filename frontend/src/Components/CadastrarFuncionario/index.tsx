@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import Link from "next/link";
 import styles from "./styles.module.scss";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
