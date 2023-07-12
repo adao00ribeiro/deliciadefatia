@@ -1,10 +1,20 @@
 .side {
+
     background-color: var(--normal-dark-gray);
     width: 20%;
     height: 100%;
-
+    transition: 1s;
+    transform: none;
 }
 
+.sidehidden {
+    width: 0;
+    height: 100%;
+    background-color: var(--normal-dark-gray);
+    transition: 1s;
+    transform: translateX(-100vw);
+
+}
 
 .nav {
     padding: 2rem;
@@ -15,31 +25,21 @@
         gap: 1rem;
     }
 
-    li {
-        list-style-type: none;
+    a {
 
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-
-
-        a {
-
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: rgb(85, 85, 85);
-
-        }
+        color: white;
+        font-size: 1.5rem;
+        text-decoration: none;
     }
+
+    a:hover {
+        color: rgb(85, 85, 85);
+    }
+
 }
 
 .opcoes {
-    flex: 1;
-    display: flex;
+    display: none;
     flex-direction: column;
     margin-left: 1rem;
     background-color: rgb(63, 63, 63);

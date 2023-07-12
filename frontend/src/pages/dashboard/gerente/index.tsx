@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
-import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, createRef, useContext, useEffect, useState } from 'react'
 import { Header } from '../../../Components/Header'
 import { SideBar } from '../../../Components/sidebar'
 import useCurrentScreen from '../../../Store/useCurrentScreen'
@@ -16,7 +16,6 @@ import Pedidos from '../../../Components/Pedidos'
 
 export default function DashboardGerente() {
     const currentScreen = useCurrentScreen(state => state.current)
-    console.log(currentScreen)
     return (
         <>
             <Head>

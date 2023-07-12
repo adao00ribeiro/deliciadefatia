@@ -1,0 +1,32 @@
+.cardPedido {
+    cursor: pointer;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    background-color: var(--dark-gray);
+
+}
+
+.cardPedido:hover {
+    background-color: var(--normal-dark-gray);
+
+}
+
+.cardPedido div:first-child {
+    width: 9px;
+    height: 50px;
+    border-radius: 0.3rem 0 0 0.3rem;
+    background-color: var(--golden-yellow);
+
+}
+
+
+.cardPedido div:last-child {
+    width: 9px;
+    height: 50px;
+    border-radius: 0 0.3rem 0.3rem 0;
+    background-color: var(--golden-yellow);
+}
