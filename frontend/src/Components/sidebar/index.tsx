@@ -13,7 +13,12 @@ export function SideBar() {
     const setcurrent = useCurrentScreen(state => state.setCurrent)
 
     const mostrarOpcoes = () => {
-        setopcoes(true);
+        var opcoes = document.getElementById("opcoes");
+        if (opcoes.style.display === "none") {
+            opcoes.style.display = "flex"; // Mostra as opções
+        } else {
+            opcoes.style.display = "none"; // Esconde as opções
+        }
     }
 
     const handleClick = useCallback((newcurrent: ECurrentScreen) => {
@@ -25,10 +30,10 @@ export function SideBar() {
         < aside className={isactive ? styles.side : styles.sidehidden}  >
             <nav className={styles.nav}>
                 <ul>
-                    <Link href={""} onClick={mostrarOpcoes}>
+                    <a onClick={mostrarOpcoes}>
                         Cadastrar
-                    </Link>
-                    <div className={styles.opcoes}>
+                    </a>
+                    <div id="opcoes" className={styles.opcoes}>
                         <Link
                             onClick={() => { handleClick(ECurrentScreen.CADASTROFUNCIONARIO); }} href={""}>
                             Funcionario
@@ -44,12 +49,11 @@ export function SideBar() {
                             Produtos
                         </Link>
                     </div>
-                    <Link
-                        href={""}
-                        onClick={() => { handleClick(ECurrentScreen.CAIXA); }} >Caixa</Link>
-                    <Link
-                        href={""}
-                        onClick={() => { handleClick(ECurrentScreen.PEDIDOS); }}  >Pedidos</Link>
+                    <a
+                        onClick={() => { handleClick(ECurrentScreen.CAIXA); }} >Caixa</a>
+                    <a
+                        onClick={() => { handleClick(ECurrentScreen.PEDIDOS); }}  >Pedidos
+                    </a>
                 </ul>
             </nav>
         </aside >
