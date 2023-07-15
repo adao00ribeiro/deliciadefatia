@@ -1,15 +1,31 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-type UserProps = {
-    email: string,
-    password: string,
-
+import { IUser } from '../interfaces/IUser';
+interface IUserProps {
+    user: IUser;
+    token: string;
+    setUser: (user: IUser) => void;
+    setToken: (newtoken: string) => void;
 }
 
-const useUser = create(persist<UserProps>(
+const useUser = create(persist<IUserProps>(
     (set, get) => ({
-        email: 'asdasd',
-        password: undefined
+        user: undefined,
+        token: undefined,
+        setUser: (user: IUser) => {
+            set((state) => (
+                {
+                    user: user
+                }
+            ));
+        },
+        setToken: (newtoken: string) => {
+            set((state) => (
+                {
+                    token: newtoken
+                }
+            ));
+        }
     }),
     {
         name: 'user-storage', // unique name

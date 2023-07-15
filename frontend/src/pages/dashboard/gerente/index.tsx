@@ -10,6 +10,7 @@ import { CadastrarCategoria } from '../../../Components/CadastrarCategoria'
 import { CadastrarProduto } from '../../../Components/CadastrarProduto'
 import Caixa from '../../../Components/Caixa'
 import Pedidos from '../../../Components/Pedidos'
+import { canSSRAuth } from '../../../utils/canSSRAuth'
 
 
 
@@ -50,3 +51,11 @@ export default function DashboardGerente() {
         </>
     )
 }
+
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+    return {
+        props: {}
+    }
+}
+)

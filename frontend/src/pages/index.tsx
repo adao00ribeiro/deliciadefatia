@@ -8,7 +8,7 @@ import DashboardGerente from './dashboard/gerente'
 export default function Home() {
   return (
     <>
-      <DashboardGerente></DashboardGerente>
+      <Login></Login>
 
     </>
 
