@@ -7,7 +7,7 @@ import {
     MinLength,
 } from 'class-validator';
 
-export class CreateUserDto extends User{
+export class CreateUserDto extends User {
     @IsString()
     name: string;
 
@@ -26,5 +26,5 @@ export class CreateUserDto extends User{
     created_at?: string | Date;
     updated_at?: string | Date;
 
-    
+
 }
