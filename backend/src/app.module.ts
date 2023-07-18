@@ -6,9 +6,10 @@ import { CategoryResolver } from './category/category.resolver';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
+import { ItemModule } from './item/item.module';
 
 @Module({
-  imports: [UserModule, CategoryModule, ProductModule, OrderModule],
+  imports: [UserModule, CategoryModule, ProductModule, OrderModule, ItemModule],
   controllers: [AppController],
   providers: [AppService, CategoryResolver],
 })
