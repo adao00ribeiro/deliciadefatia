@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpException, Query, Req } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -17,30 +17,27 @@ export class CategoryController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     try {
-      return this.categoryService.findAll();
+      return await this.categoryService.findAll();
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-
+  async findOne(@Param('id') id: string) {
     try {
-      return this.categoryService.findOne(id);
+      return await this.categoryService.findOne(id);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
-
-
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
+  async update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     try {
-      return this.categoryService.update(id, updateCategoryDto);
+      return await this.categoryService.update(id, updateCategoryDto);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
@@ -48,12 +45,11 @@ export class CategoryController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     try {
-      return this.categoryService.remove(id);
+      return await this.categoryService.remove(id);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
-
   }
 }
