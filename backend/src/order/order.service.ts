@@ -1,26 +1,50 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class OrderService {
-  create(createOrderDto: CreateOrderDto) {
-    return 'This action adds a new order';
+  constructor(private readonly prisma: PrismaService) { }
+  async create(createOrderDto: CreateOrderDto) {
+    return await this.prisma.order.create({
+      data: createOrderDto
+    });
   }
 
-  findAll() {
-    return `This action returns all order`;
+  async findAll() {
+    const list = await this.prisma.order.findMany();
+    if (list.length == 0) {
+      throw new Error('Vazio');
+    }
+    return list
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: string) {
+    const order = await this.prisma.order.findUnique({
+      where: { id }
+    });
+    if (!order) {
+      throw new Error('Nao Encontrado');
+    }
+    return order;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+  async update(id: string, updateOrderDto: UpdateOrderDto) {
+    return "update ";
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  async remove(id: string) {
+
+    const order = await this.prisma.order.findUnique({
+      where: { id }
+    });
+    if (!order) {
+      throw new Error("nao encontrado")
+    }
+
+    return this.prisma.order.delete({
+      where: { id }
+    });
   }
 }
