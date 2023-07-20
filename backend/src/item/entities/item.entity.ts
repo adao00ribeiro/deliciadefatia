@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 
-export class implementsm implements Prisma.ItemUncheckedCreateInput {
+export class Item implements Prisma.ItemUncheckedCreateInput {
     id?: string;
     amount: number;
     created_at?: string | Date;
