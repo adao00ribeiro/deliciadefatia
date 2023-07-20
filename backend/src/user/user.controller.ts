@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpS
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
 
 @Controller('user')
 export class UserController {
@@ -15,7 +16,6 @@ export class UserController {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
-
   @Get()
   async findAll() {
     const Listuser = await this.userService.findAll();
