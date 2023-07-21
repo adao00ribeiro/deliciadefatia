@@ -5,8 +5,36 @@ import Link from 'next/link'
 import Button from '../../Components/ui/Button'
 import Input from '../../Components/ui/Input'
 import { canSSRGuest } from '../../utils/canSSRGuest'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { SignIn } from './../../services/Sign/SignIn'
+import useUser from '../../Store/useUser'
+import { toast } from 'react-toastify'
+
 
 export default function Login() {
+    const setToken = useUser(state => state.setToken)
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: ""
+    })
+    const [loading, setLoading] = useState(false)
+
+
+    async function handleLogin(event: FormEvent) {
+        event.preventDefault();
+
+        if (inputs.email === "" || inputs.password === "") {
+            toast.warning("Preencha os campos!")
+            return
+        }
+        setLoading(true);
+        await SignIn({ email: inputs.email, password: inputs.password }, setToken);
+        setLoading(false);
+    }
+    const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setInputs({ ...inputs, [name]: value });
+    }
 
     return (
         <>
@@ -20,10 +48,24 @@ export default function Login() {
                 <Image src="/FatiaPizza.svg" alt='Logo Fatia de Pizza' width={200} height={200} />
                 <div className={styles.containerLogin}>
                     <h1>Login</h1>
-                    <form >
-                        <Input type="email" name='email' placeholder='Seu email'></Input>
-                        <Input type="password" name='password' placeholder='Sua senha'></Input>
-                        <Button type='submit'>Acessar</Button>
+                    <form onSubmit={handleLogin}>
+                        <Input
+                            value={inputs.email}
+                            type="email"
+                            name='email'
+                            placeholder='Seu email'
+                            onChange={handleInput}
+                        />
+
+                        <Input
+                            value={inputs.password}
+                            type="password"
+                            name='password'
+                            placeholder='Sua senha'
+                            onChange={handleInput}
+                        />
+
+                        <Button type='submit' disabled={loading}>Acessar</Button>
                     </form>
                     <Link href={'/registrar'}> Não possui uma conta? Cadastre-se</Link>
                 </div>

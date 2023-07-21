@@ -2,8 +2,10 @@ import { useState } from "react";
 import { ModalDetalhePedido } from "../../Modal/ModalDetalhePedido";
 import styles from "./styles.module.scss";
 
-
-export default _ => {
+interface ICardPedido {
+    table: number
+}
+export default (props: ICardPedido) => {
     const [IsOpenModal, setIsOpenModal] = useState(false)
 
     const OpenModal = () => {
@@ -17,7 +19,7 @@ export default _ => {
             <div className={styles.cardPedido} onClick={OpenModal}>
                 <div>
                 </div>
-                <span>Mesa 30</span>
+                <span>Mesa {props.table}</span>
                 <div>
                 </div>
             </div>

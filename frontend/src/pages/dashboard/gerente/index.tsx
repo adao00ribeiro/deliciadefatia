@@ -11,12 +11,20 @@ import { CadastrarProduto } from '../../../Components/CadastrarProduto'
 import Caixa from '../../../Components/Caixa'
 import Pedidos from '../../../Components/Pedidos'
 import { canSSRAuth } from '../../../utils/canSSRAuth'
+import { setupAPIClient } from '../../../services/api'
+import useUser from '../../../Store/useUser'
+import useOrders from '../../../Store/useOrders'
 
 
+interface IDashboardGerenteProps {
+    listPedidos: []
+}
 
+export default function DashboardGerente(props: IDashboardGerenteProps) {
 
-export default function DashboardGerente() {
-    const currentScreen = useCurrentScreen(state => state.current)
+    const setOrders = useOrders(state => state.setOrders);
+    const currentScreen = useCurrentScreen(state => state.current);
+    setOrders(props.listPedidos);
     return (
         <>
             <Head>
@@ -54,8 +62,13 @@ export default function DashboardGerente() {
 
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+    const apiClient = setupAPIClient(ctx);
+    const response = await apiClient.get('/order');
+    const listPedidos = response.data;
     return {
-        props: {}
+        props: {
+            listPedidos
+        }
     }
 }
 )
