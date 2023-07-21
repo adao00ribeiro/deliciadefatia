@@ -7,8 +7,16 @@ import { FiUpload } from "react-icons/fi";
 
 
 export function CadastrarProduto() {
-    const [imageUrl, setimageUrl] = useState('');
-    const [imageAvatar, setimageAvatar] = useState(null);
+    const [Inputs, setInputs] = useState({
+        nome: "",
+        categoria: "",
+        preco: "",
+        descricao: "",
+        imageUrl: "",
+        imageAvatar: null,
+    });
+
+
     return (
         <div className={styles.containerCadastrar}>
             <h1>Novo Produto</h1>
@@ -21,7 +29,7 @@ export function CadastrarProduto() {
                     <input type="file" accept="image/png, image/jpeg" />
 
                     {
-                        imageUrl &&
+                        Inputs.imageUrl &&
                         <img
                             className={styles.preview}
                             src={''}

@@ -1,10 +1,17 @@
 import styles from "./styles.module.scss";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
+import { useState } from "react";
 
 
 export function CadastrarFuncionario() {
-
+    const [Inputs, setInputs] = useState({
+        nome: "",
+        cargo: "",
+        email: "",
+        Telefone: "",
+        Senha: ""
+    })
     return (
         <div className={styles.containerCadastrar}>
             <h1>Cadastrar Funcionário</h1>
@@ -26,6 +33,7 @@ export function CadastrarFuncionario() {
                 </div>
                 <div className={styles.group}>
                     <Input type="tel" id="telefone" name="telefone" placeholder="Telefone" required /><br /><br />
+                    <Input type="tel" id="senha" name="senha" placeholder="Senha" required /><br /><br />
                 </div>
                 <Button>Cadastrar</Button>
             </form>

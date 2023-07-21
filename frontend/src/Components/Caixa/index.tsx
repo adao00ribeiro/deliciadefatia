@@ -6,6 +6,7 @@ import Input from "../ui/Input";
 import useOrders from "../../Store/useOrders";
 
 
+
 export default _ => {
 
     const orders = useOrders(state => state.orders)
@@ -26,16 +27,19 @@ export default _ => {
         <div className={styles.containerCadastrar}>
             <h1>Caixa</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
+                <label htmlFor="select">Selecione uma Mesa:</label>
                 <select
+                    id="select"
                     name="select"
                     value={valorSelecionado}
                     onChange={handleSelecionarOpcao}
                 >
                     {orders.map((item, index) => {
-                        return <option value={item['id']}>Mesa {item['table']}</option>
+                        return <option key={index} value={item['id']}>Mesa {item['table']}</option>
                     })}
+
                 </select>
-                <Button type="submit">Cadastrar</Button>
+                <Button type="submit">Consultar</Button>
             </form>
         </div>
     )
