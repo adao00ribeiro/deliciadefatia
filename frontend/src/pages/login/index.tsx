@@ -3,8 +3,8 @@ import Image from 'next/image'
 import styles from './styles.module.scss'
 import Link from 'next/link'
 import Button from '../../Components/ui/Button'
-import useUser from '../../Store/useUser'
 import Input from '../../Components/ui/Input'
+import { canSSRGuest } from '../../utils/canSSRGuest'
 
 export default function Login() {
 
@@ -31,3 +31,9 @@ export default function Login() {
         </>
     )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+    return {
+        props: {}
+    }
+})
