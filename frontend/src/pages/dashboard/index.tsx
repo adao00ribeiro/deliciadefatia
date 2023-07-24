@@ -1,30 +1,37 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
 import React, { ChangeEvent, FormEvent, createRef, useContext, useEffect, useState } from 'react'
-import { Header } from '../../../Components/Header'
-import { SideBar } from '../../../Components/sidebar'
-import useCurrentScreen from '../../../Store/useCurrentScreen'
-import { ECurrentScreen } from '../../../enums/ECurrentScreen'
-import { CadastrarFuncionario } from '../../../Components/CadastrarFuncionario'
-import { CadastrarCategoria } from '../../../Components/CadastrarCategoria'
-import { CadastrarProduto } from '../../../Components/CadastrarProduto'
-import Caixa from '../../../Components/Caixa'
-import Pedidos from '../../../Components/Pedidos'
-import { canSSRAuth } from '../../../utils/canSSRAuth'
-import { setupAPIClient } from '../../../services/api'
-import useUser from '../../../Store/useUser'
-import useOrders from '../../../Store/useOrders'
+import { Header } from '../../Components/Header'
+import { SideBar } from '../../Components/sidebar'
+import useCurrentScreen from '../../Store/useCurrentScreen'
+import { ECurrentScreen } from '../../enums/ECurrentScreen'
+import { CadastrarFuncionario } from '../../Components/CadastrarFuncionario'
+import { CadastrarCategoria } from '../../Components/CadastrarCategoria'
+import { CadastrarProduto } from '../../Components/CadastrarProduto'
+import Caixa from '../../Components/Caixa'
+import Pedidos from '../../Components/Pedidos'
+import { canSSRAuth } from '../../utils/canSSRAuth'
+import { setupAPIClient } from '../../services/api'
+import useUser from '../../Store/useUser'
+import useOrders from '../../Store/useOrders'
+import useCategorys from '../../Store/useCategory'
 
 
 interface IDashboardGerenteProps {
-    listPedidos: []
+    listPedidos: [];
+    listCategory:[];
 }
 
-export default function DashboardGerente(props: IDashboardGerenteProps) {
+export default function Dashboard(props: IDashboardGerenteProps) {
 
     const setOrders = useOrders(state => state.setOrders);
+    const setCategorys = useCategorys(state => state.setCategorys);
     const currentScreen = useCurrentScreen(state => state.current);
+    
+    setCategorys(props.listCategory);
     setOrders(props.listPedidos);
+
+    
     return (
         <>
             <Head>
@@ -63,11 +70,20 @@ export default function DashboardGerente(props: IDashboardGerenteProps) {
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx);
-    const response = await apiClient.get('/order');
-    const listPedidos = response.data;
+    const responseOrder = await apiClient.get('/order');
+    const responseCategory = await apiClient.get('/category');
+
+    const Listcategorys = [
+        { id: '', name: "Selecione uma categoria" },
+        ... responseCategory.data.sort((a, b) => a.name.localeCompare(b.name))
+      ];
+
+    const listPedidos = responseOrder.data;
+    const listCategory = Listcategorys;
     return {
         props: {
-            listPedidos
+            listPedidos,
+            listCategory
         }
     }
 }

@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { IUser } from '../interfaces/IUser';
-interface IUserProps {
+interface IOrderProps {
     orders: [];
     setOrders: (orders: []) => void;
 }
 
-const useOrders = create(persist<IUserProps>(
+const useOrders = create(persist<IOrderProps>(
     (set, get) => ({
         orders: undefined,
         setOrders: (orders: []) => {

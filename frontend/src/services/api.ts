@@ -17,7 +17,7 @@ export function setupAPIClient(ctx = undefined) {
         if (error.response.status === 401) {
             //deslogar
             if (typeof window !== undefined) {
-                console.log("estavindoaki")
+             
                 // sighOut();
             } else {
                 return Promise.reject(new AuthTokenError())
