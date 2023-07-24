@@ -4,24 +4,33 @@ import styles from "./styles.module.scss";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import useOrders from "../../Store/useOrders";
+import { ModalDetalheMesa } from "../Modal/ModalDetalheMesa";
 
 
 
 export default _ => {
+    const [IsOpenModal, setIsOpenModal] = useState(false)
+
 
     const orders = useOrders(state => state.orders)
     const [valorSelecionado, setValorSelecionado] = useState(orders?.at(0)['id'] || '');
     const handleSelecionarOpcao = (event) => {
         setValorSelecionado(event.target.value);
     };
+    const OpenModal = () => {
+
+        setIsOpenModal(true);
+    }
+    const CloseModal = () => {
+
+        setIsOpenModal(false);
+    }
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         if (!valorSelecionado) {
             return;
         }
-
-
-        alert("abre modal")
+        OpenModal();
     }
     return (
         <div className={styles.containerCadastrar}>
@@ -41,6 +50,7 @@ export default _ => {
                 </select>
                 <Button type="submit">Consultar</Button>
             </form>
+            <ModalDetalheMesa IsOpen={IsOpenModal} CloseModal={CloseModal} />
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { destroyCookie } from "nookies";
 
-export function sighOut() {
+export default () => {
     try {
         destroyCookie(undefined, '@nextauth.token')
         Router.push('/')

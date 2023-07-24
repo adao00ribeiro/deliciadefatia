@@ -25,7 +25,7 @@ export default _ => {
             <div className={styles.containerCadastrar}>
                 <h1>Pedidos</h1>
                 {listaOrder.map((item, index) => {
-                    return < CardPedido key={index} table={item['table']} />
+                    return < CardPedido key={index} order={item} />
                 })
                 }
             </div>

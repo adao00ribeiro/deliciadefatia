@@ -1,17 +1,18 @@
-import { ChangeEvent, FormEvent, useCallback, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useContext, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { FiUpload } from "react-icons/fi";
 import useCategorys from "../../Store/useCategory";
 import RegisterProduct from "../../services/funcoes/RegisterProduct";
+import GetCategorys from "../../services/funcoes/GetCategorys";
 
 
 
 export function CadastrarProduto() {
 
     const categorys = useCategorys(state => state.categorys);
-
+    const setcategorys = useCategorys(state => state.setCategorys);
     const [Inputs, setInputs] = useState({
         nome: "",
         categoria: "",
@@ -20,7 +21,16 @@ export function CadastrarProduto() {
         imageUrl: "",
         imageAvatar: null,
     });
+    useEffect(() => {
+        GetCategorys()
+            .then((list) => {
+                setcategorys(list)
+            })
+            .catch((error) => {
 
+            })
+
+    }, [])
     const handleSelecionarOpcao = useCallback((event) => {
         const { name, value } = event.target;
         setInputs({ ...Inputs, [name]: value });

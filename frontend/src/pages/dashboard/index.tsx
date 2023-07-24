@@ -15,23 +15,22 @@ import { setupAPIClient } from '../../services/api'
 import useUser from '../../Store/useUser'
 import useOrders from '../../Store/useOrders'
 import useCategorys from '../../Store/useCategory'
+import { IOrder } from '../../interfaces/IOrder'
+import { api } from '../../services/apiClient'
 
 
 interface IDashboardGerenteProps {
     listPedidos: [];
-    listCategory:[];
+
 }
 
 export default function Dashboard(props: IDashboardGerenteProps) {
 
     const setOrders = useOrders(state => state.setOrders);
-    const setCategorys = useCategorys(state => state.setCategorys);
     const currentScreen = useCurrentScreen(state => state.current);
-    
-    setCategorys(props.listCategory);
     setOrders(props.listPedidos);
 
-    
+
     return (
         <>
             <Head>
@@ -71,19 +70,14 @@ export default function Dashboard(props: IDashboardGerenteProps) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx);
     const responseOrder = await apiClient.get('/order');
-    const responseCategory = await apiClient.get('/category');
 
-    const Listcategorys = [
-        { id: '', name: "Selecione uma categoria" },
-        ... responseCategory.data.sort((a, b) => a.name.localeCompare(b.name))
-      ];
 
-    const listPedidos = responseOrder.data;
-    const listCategory = Listcategorys;
+
+    const listPedidos: IOrder = responseOrder.data;
+
     return {
         props: {
-            listPedidos,
-            listCategory
+            listPedidos
         }
     }
 }

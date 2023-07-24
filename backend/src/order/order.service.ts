@@ -13,7 +13,17 @@ export class OrderService {
   }
 
   async findAll() {
-    const list = await this.prisma.order.findMany();
+    const list = await this.prisma.order.findMany(
+      {
+        include: {
+          items: {
+            include: {
+              product: true
+            }
+          }
+        }
+      }
+    );
     if (list.length == 0) {
       throw new Error('Vazio');
     }
@@ -22,7 +32,7 @@ export class OrderService {
 
   async findOne(id: string) {
     const order = await this.prisma.order.findUnique({
-      where: { id }
+      where: { id },
     });
     if (!order) {
       throw new Error('Nao Encontrado');
