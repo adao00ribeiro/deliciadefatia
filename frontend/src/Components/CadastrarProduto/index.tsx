@@ -1,12 +1,11 @@
 import { ChangeEvent, FormEvent, useCallback, useContext, useState } from "react";
-import Link from "next/link";
 import styles from "./styles.module.scss";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { FiUpload } from "react-icons/fi";
-import { GetServerSideProps } from "next";
-import axios from "axios";
 import useCategorys from "../../Store/useCategory";
+import RegisterProduct from "../../services/funcoes/RegisterProduct";
+
 
 
 export function CadastrarProduto() {
@@ -48,11 +47,29 @@ export function CadastrarProduto() {
     }
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
-        if(!Inputs.imageAvatar){
+        if (!Inputs.imageAvatar) {
             alert("Imagem nao selecionada")
             return;
         }
-        
+        const IsSucess = await RegisterProduct({
+            name: Inputs.nome,
+            price: Inputs.preco,
+            description: Inputs.descricao,
+            banner: Inputs.imageUrl,
+            category_id: Inputs.categoria,
+            imageAvatar: Inputs.imageAvatar
+        });
+        if (IsSucess) {
+            setInputs({
+                ...Inputs,
+                nome: "",
+                preco: "",
+                descricao: "",
+                imageUrl: "",
+                categoria: '',
+                imageAvatar: null
+            })
+        }
     }
     return (
         <div className={styles.containerCadastrar}>
@@ -63,7 +80,7 @@ export function CadastrarProduto() {
                     <span>
                         <FiUpload size={30} color="#FFF" />
                     </span>
-                    <input type="file" name='inputFile'  accept="image/png, image/jpeg" onChange={handleFile}  />
+                    <input type="file" name='inputFile' accept="image/png, image/jpeg" onChange={handleFile} />
                     {
                         Inputs.imageUrl &&
                         <img
