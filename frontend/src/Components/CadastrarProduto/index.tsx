@@ -29,10 +29,6 @@ export function CadastrarProduto() {
     }, [Inputs]);
 
     const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
-
-        console.log(event.target)
-
-
         if (!event.target.files) {
             return;
         }
@@ -43,14 +39,20 @@ export function CadastrarProduto() {
         }
         if (image.type === 'image/jpeg' || image.type === 'image/png') {
 
-            setInputs({ ...Inputs, imageAvatar: image });
-            setInputs({ ...Inputs, imageUrl: URL.createObjectURL(event.target.files[0]) })
+            setInputs({
+                ...Inputs,
+                imageUrl: URL.createObjectURL(event.target.files[0]),
+                imageAvatar: image
+            })
         }
     }
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
-
-        console.log(Inputs)
+        if(!Inputs.imageAvatar){
+            alert("Imagem nao selecionada")
+            return;
+        }
+        
     }
     return (
         <div className={styles.containerCadastrar}>
@@ -61,13 +63,12 @@ export function CadastrarProduto() {
                     <span>
                         <FiUpload size={30} color="#FFF" />
                     </span>
-                    <input type="file" accept="image/png, image/jpeg" onChange={handleFile} />
-
+                    <input type="file" name='inputFile'  accept="image/png, image/jpeg" onChange={handleFile}  />
                     {
                         Inputs.imageUrl &&
                         <img
                             className={styles.preview}
-                            src={''}
+                            src={Inputs.imageUrl}
                             alt="Foto do produto"
                             width={250}
                             height={250}
