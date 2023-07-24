@@ -1,19 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
+import { diskStorage } from 'multer';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) { }
 
+  @IsPublic()
   @Post()
-  async create(@Body() createProductDto: CreateProductDto) {
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: "./public/uploads",
+      filename: (req, file, cb) => {
+        cb(null, `${file.originalname}`)
+      }
+    })
+  }))
+  async create(
+    @Body() createProductDto: CreateProductDto,
+    @UploadedFile() file: Express.Multer.File) {
+    const { originalname, filename: banner } = file;
+    const product = { ...createProductDto, banner: banner }
+
     try {
-      return await this.productService.create(createProductDto);
+      return await this.productService.create(product);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
+
   }
 
   @Get()
