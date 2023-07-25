@@ -17,19 +17,31 @@ import useOrders from '../../Store/useOrders'
 import useCategorys from '../../Store/useCategory'
 import { IOrder } from '../../interfaces/IOrder'
 import { api } from '../../services/apiClient'
+import { IUser } from '../../interfaces/IUser'
+import Perfil from '../../Components/Perfil'
 
 
 interface IDashboardGerenteProps {
     listPedidos: [];
-
+    user: IUser
 }
 
 export default function Dashboard(props: IDashboardGerenteProps) {
-
+    const user = useUser(state => state.user)
+    const setUser = useUser(state => state.setUser)
     const setOrders = useOrders(state => state.setOrders);
     const currentScreen = useCurrentScreen(state => state.current);
+    const setcurrentScreen = useCurrentScreen(state => state.setCurrent);
     setOrders(props.listPedidos);
+    setUser(props.user)
+    console.log(props.user)
 
+    if (user.jobtitle == 'CAIXA') {
+        setcurrentScreen(ECurrentScreen.CAIXA);
+    }
+    if (user.jobtitle == 'PIZZAIOLO') {
+        setcurrentScreen(ECurrentScreen.PEDIDOS);
+    }
 
     return (
         <>
@@ -43,7 +55,9 @@ export default function Dashboard(props: IDashboardGerenteProps) {
             <div className={styles.container}>
                 <Header />
                 <div className={styles.containerMain}>
-                    <SideBar />
+                    {user?.jobtitle == "ADMIN" &&
+                        < SideBar />
+                    }
                     {currentScreen == ECurrentScreen.CADASTROFUNCIONARIO &&
                         <CadastrarFuncionario></CadastrarFuncionario>
                     }
@@ -59,7 +73,9 @@ export default function Dashboard(props: IDashboardGerenteProps) {
                     {currentScreen == ECurrentScreen.PEDIDOS &&
                         <Pedidos></Pedidos>
                     }
-
+                    {currentScreen == ECurrentScreen.PERFIL &&
+                        <Perfil />
+                    }
                 </div>
             </div >
         </>
@@ -69,15 +85,14 @@ export default function Dashboard(props: IDashboardGerenteProps) {
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx);
+    const responseUser = await apiClient.get('/profile');
     const responseOrder = await apiClient.get('/order');
-
-
-
     const listPedidos: IOrder = responseOrder.data;
-
+    const user = responseUser.data;
     return {
         props: {
-            listPedidos
+            listPedidos,
+            user
         }
     }
 }

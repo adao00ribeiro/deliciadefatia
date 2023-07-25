@@ -1,4 +1,4 @@
-import { createRef, useCallback, useContext, useEffect, useState } from "react";
+import { createRef, useCallback, useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { FiLogOut } from 'react-icons/fi'
@@ -11,8 +11,10 @@ export function SideBar() {
     const isactive = useSideBar(state => state.IsActive);
     const [opcoes, setopcoes] = useState(false);
     const setcurrent = useCurrentScreen(state => state.setCurrent)
-
+    const divRef = useRef<HTMLDivElement>();
     const mostrarOpcoes = () => {
+
+
         var opcoes = document.getElementById("opcoes");
         if (opcoes.style.display === "none") {
             opcoes.style.display = "flex"; // Mostra as opções
@@ -33,7 +35,16 @@ export function SideBar() {
                     <a onClick={mostrarOpcoes}>
                         Cadastrar
                     </a>
-                    <div id="opcoes" className={styles.opcoes}>
+                    <div
+                        id="opcoes"
+                        className={styles.opcoes}
+                        style={
+                            {
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center'
+                            }
+                        }>
                         <Link
                             onClick={() => { handleClick(ECurrentScreen.CADASTROFUNCIONARIO); }} href={""}>
                             Funcionario

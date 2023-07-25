@@ -21,6 +21,7 @@ export class CreateUserDto extends User {
         message: 'password too weak',
     })
     password: string;
+    @IsString()
     jobtitle?: string;
     avatarurl?: string;
     created_at?: string | Date;

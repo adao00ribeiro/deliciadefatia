@@ -40,14 +40,12 @@
 }
 
 .opcoes {
-    display: none;
-    flex-direction: column;
     margin-left: 1rem;
     background-color: rgb(63, 63, 63);
 }
 
 .opcoes a {
-    flex: 1;
+
     color: white;
     cursor: pointer;
     padding: 0.7rem;

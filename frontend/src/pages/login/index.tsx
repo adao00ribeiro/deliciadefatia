@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from './styles.module.scss'
-import Link from 'next/link'
 import Button from '../../Components/ui/Button'
 import Input from '../../Components/ui/Input'
 import { canSSRGuest } from '../../utils/canSSRGuest'
@@ -67,7 +66,9 @@ export default function Login() {
 
                         <Button type='submit' disabled={loading}>Acessar</Button>
                     </form>
-                    <Link href={'/registrar'}> Não possui uma conta? Cadastre-se</Link>
+                    {
+                        //  <Link href={'/registrar'}> Não possui uma conta? Cadastre-se</Link>
+                    }
                 </div>
             </div>
         </>

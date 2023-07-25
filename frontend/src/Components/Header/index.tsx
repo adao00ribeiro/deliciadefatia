@@ -4,11 +4,14 @@ import Image from "next/image";
 import useSideBar from "../../Store/useSideBar";
 import PerfilOption from "../PerfilOption";
 import { useEffect, useRef, useState } from "react";
+import useUser from "../../Store/useUser";
 
 export function Header() {
 
     const [IsOption, setIsOption] = useState(false);
     const containerRef = useRef(null);
+
+    const user = useUser(state => state.user);
     const isactive = useSideBar(state => state.IsActive);
     const setIsActive = useSideBar(state => state.setIsActive);
 
@@ -18,11 +21,13 @@ export function Header() {
                 setIsOption(false);
             }
         }
-
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
     const showNavbar = () => {
+        if (user.jobtitle != "ADMIN") {
+            return;
+        }
         setIsActive(!isactive)
     }
 

@@ -4,5 +4,6 @@ export enum ECurrentScreen {
     CADASTROCATEGORIA,
     CADASTROPRODUTO,
     CAIXA,
-    PEDIDOS
+    PEDIDOS,
+    PERFIL
 }
