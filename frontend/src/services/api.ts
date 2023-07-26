@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { parseCookies } from "nookies";
 import { AuthTokenError } from "./errors/AuthTokenError";
-import { sighOut } from "./Sign/SignOut";
+import  SighOut  from "./Sign/SignOut";
 export function setupAPIClient(ctx = undefined) {
     let cookies = parseCookies(ctx);
 
@@ -18,7 +18,7 @@ export function setupAPIClient(ctx = undefined) {
         if (error.response.status === 401) {
             //deslogar
             if (typeof window !== undefined) {
-               sighOut();
+               SighOut();
             } else {
                 return Promise.reject(new AuthTokenError())
             }

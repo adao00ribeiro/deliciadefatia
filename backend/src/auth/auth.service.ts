@@ -19,7 +19,8 @@ export class AuthService {
             sub: user.id,
             email: user.email,
             name: user.name,
-            jobtitle: user.jobtitle
+            jobtitle: user.jobtitle,
+            avatarurl:user.avatarurl
         };
         return {
             access_token: this.jwtService.sign(payload),

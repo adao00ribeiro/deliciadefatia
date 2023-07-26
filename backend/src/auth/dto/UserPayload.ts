@@ -4,6 +4,7 @@ export interface UserPayload {
     email: string;
     name: string;
     jobtitle: string;
+    avatarurl:string;
     iat?: number;
     exp?: number;
 }

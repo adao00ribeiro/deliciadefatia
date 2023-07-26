@@ -25,7 +25,7 @@ export function Header() {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
     const showNavbar = () => {
-        if (user.jobtitle != "ADMIN") {
+        if (user?.jobtitle != "ADMIN") {
             return;
         }
         setIsActive(!isactive)
@@ -47,12 +47,10 @@ export function Header() {
                 </div>
 
                 <div ref={containerRef} className={styles.containerAvatar} onClick={handlePerfilOption} >
-                    <Image src={"/avatarui.png"} fill alt={""}></Image>
-
+                    <Image src={user?.avatarurl ? "http://localhost:3333/"+user.avatarurl :"/avatarui.png"} fill alt={""}></Image>
                     {IsOption &&
                         <PerfilOption></PerfilOption>
                     }
-
                 </div>
 
             </div>

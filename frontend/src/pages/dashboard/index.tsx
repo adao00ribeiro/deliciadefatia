@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from './styles.module.scss'
-import React, { ChangeEvent, FormEvent, createRef, useContext, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, createRef, useCallback, useContext, useEffect, useState } from 'react'
 import { Header } from '../../Components/Header'
 import { SideBar } from '../../Components/sidebar'
 import useCurrentScreen from '../../Store/useCurrentScreen'
@@ -14,34 +14,17 @@ import { canSSRAuth } from '../../utils/canSSRAuth'
 import { setupAPIClient } from '../../services/api'
 import useUser from '../../Store/useUser'
 import useOrders from '../../Store/useOrders'
-import useCategorys from '../../Store/useCategory'
 import { IOrder } from '../../interfaces/IOrder'
-import { api } from '../../services/apiClient'
 import { IUser } from '../../interfaces/IUser'
 import Perfil from '../../Components/Perfil'
+import GetProfile from '../../services/funcoes/GetProfile'
 
 
-interface IDashboardGerenteProps {
-    listPedidos: [];
-    user: IUser
-}
 
-export default function Dashboard(props: IDashboardGerenteProps) {
+export default function Dashboard() {
     const user = useUser(state => state.user)
     const setUser = useUser(state => state.setUser)
-    const setOrders = useOrders(state => state.setOrders);
     const currentScreen = useCurrentScreen(state => state.current);
-    const setcurrentScreen = useCurrentScreen(state => state.setCurrent);
-    setOrders(props.listPedidos);
-    setUser(props.user)
-    console.log(props.user)
-
-    if (user.jobtitle == 'CAIXA') {
-        setcurrentScreen(ECurrentScreen.CAIXA);
-    }
-    if (user.jobtitle == 'PIZZAIOLO') {
-        setcurrentScreen(ECurrentScreen.PEDIDOS);
-    }
 
     return (
         <>
@@ -74,7 +57,7 @@ export default function Dashboard(props: IDashboardGerenteProps) {
                         <Pedidos></Pedidos>
                     }
                     {currentScreen == ECurrentScreen.PERFIL &&
-                        <Perfil />
+                        <Perfil  />
                     }
                 </div>
             </div >
@@ -84,15 +67,11 @@ export default function Dashboard(props: IDashboardGerenteProps) {
 
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-    const apiClient = setupAPIClient(ctx);
-    const responseUser = await apiClient.get('/profile');
-    const responseOrder = await apiClient.get('/order');
-    const listPedidos: IOrder = responseOrder.data;
-    const user = responseUser.data;
+    
+
     return {
         props: {
-            listPedidos,
-            user
+           
         }
     }
 }

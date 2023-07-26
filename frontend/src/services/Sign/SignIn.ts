@@ -20,10 +20,10 @@ export async function SignIn({ email, password }: SignInProps, setToken: (token)
         //passar para as proximas reuisios o token
         api.defaults.headers['Authorization'] = `Bearear ${access_token}`
         toast.success("Logado com sucesso");
-        setTimeout(() => {
+        await setTimeout(() => {
             Router.push("/dashboard");
-        }, 500);
+        }, 1000);
     } catch (e) {
-        toast.error(e.response.data.message);
+        toast.error(e.response?.data?.message);
     }
 }

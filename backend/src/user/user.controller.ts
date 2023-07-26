@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('user')
 export class UserController {
@@ -35,9 +37,24 @@ export class UserController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: "./public/uploads",
+      filename: (req, file, cb) => {
+        cb(null, `${file.originalname}`)
+      }
+    })
+  }))
+  async update(
+    @Param('id') id: string, 
+    @Body() updateUserDto: UpdateUserDto,
+    @UploadedFile() file: Express.Multer.File
+    ) {
+      const { originalname, filename: avatarurl } = file;
+
+      const user = { ...updateUserDto, avatarurl: avatarurl }
     try {
-      return await this.userService.update(id, updateUserDto);
+      return await this.userService.update(id, user);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
