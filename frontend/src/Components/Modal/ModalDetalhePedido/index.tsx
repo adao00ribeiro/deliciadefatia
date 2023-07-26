@@ -35,7 +35,12 @@ export function ModalDetalhePedido(props: IModalDetalhePedido) {
                                             {item.product.description}
                                         </span>
                                         <div className={styles.containerImage}>
-                                            <Image src={"http://localhost:3333/" + item.product.banner} alt={""} fill></Image>
+                                            <Image
+                                                src={"http://localhost:3333/" + item.product.banner}
+                                                alt={""}
+                                                fill
+                                                sizes="(max-width: 768px) 100vw"
+                                            />
                                         </div>
                                     </div>
                                 </div>

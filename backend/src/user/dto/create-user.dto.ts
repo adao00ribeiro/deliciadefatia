@@ -23,6 +23,7 @@ export class CreateUserDto extends User {
     password: string;
     @IsString()
     jobtitle?: string;
+    @IsString()
     avatarurl?: string;
     created_at?: string | Date;
     updated_at?: string | Date;

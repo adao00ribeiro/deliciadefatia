@@ -17,39 +17,36 @@ export default () => {
     const setcurrentScreen = useCurrentScreen(state => state.setCurrent);
 
     const [inputUser, setinputUser] = useState({
-        name: '',
-        email: '',
-        jobtitle: '',
-        password: '',
+        ...user,
         password2: "",
-        avatarurl: '',
+        avatarurl: '/avatarui.png',
         imageAvatar: null
     });
 
-    useEffect(()=>{
-        
+    useEffect(() => {
+
         GetProfile()
-        .then((res)=>{
-         if (res.jobtitle == 'CAIXA') {
-             setcurrentScreen(ECurrentScreen.CAIXA);
-         }
-         if (res.jobtitle == 'PIZZAIOLO') {
-             setcurrentScreen(ECurrentScreen.PEDIDOS);
-         }
-         setinputUser({ ...inputUser, 
-            name: res.name,
-            email: res.email,
-            jobtitle: res.jobtitle,
-            password: res.password,
-            avatarurl: res.avatarurl,
-       
-        });
-         setUser(res)
-        })
-        .catch((erro)=>{
-         alert(erro.response);
-        })
-     },[setUser])
+            .then((res) => {
+                if (res.jobtitle == 'CAIXA') {
+                    setcurrentScreen(ECurrentScreen.CAIXA);
+                }
+                if (res.jobtitle == 'PIZZAIOLO') {
+                    setcurrentScreen(ECurrentScreen.PEDIDOS);
+                }
+                setinputUser({
+                    ...inputUser,
+                    name: res?.name,
+                    email: res?.email,
+                    jobtitle: res?.jobtitle,
+                    password: res?.password,
+                    avatarurl: res.avatarurl != "" ? "http://localhost:3333/" + res.avatarurl : "/avatarui.png",
+                });
+                setUser(res)
+            })
+            .catch((erro) => {
+                alert(erro.response);
+            })
+    }, [setUser, setinputUser])
 
     const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -92,14 +89,15 @@ export default () => {
                 <label className={styles.labelAvatar}>
                     <input type="file" name='inputFile' accept="image/png, image/jpeg" onChange={handleFile} />
                     <div>
-                    <Image
-                        className={styles.preview}
-                        src={inputUser.avatarurl != " " ?  "http://localhost:3333/"+inputUser.avatarurl:"/avatarui.png" }
-                        alt="Foto do produto"
-                        fill
-                    />
+                        <Image
+                            src={inputUser.avatarurl}
+                            className={styles.preview}
+                            alt="Avatar Usuario"
+                            fill
+                            sizes="(max-width: 768px) 100vw"
+                        />
                     </div>
-                  
+
                 </label>
                 <Input
                     name="name"

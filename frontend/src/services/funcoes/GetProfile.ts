@@ -1,10 +1,11 @@
-import { api } from "../apiClient";
+import { useApi } from "../../hooks/useApi";
 
-export default async ()=>{
-    try{
+export default async () => {
+    const api = useApi();
+    try {
         const responseUser = await api.get('/profile');
         return responseUser.data;
-    }catch(error){
+    } catch (error) {
         throw error
     }
 }

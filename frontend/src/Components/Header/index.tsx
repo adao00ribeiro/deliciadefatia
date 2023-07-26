@@ -14,6 +14,7 @@ export function Header() {
     const user = useUser(state => state.user);
     const isactive = useSideBar(state => state.IsActive);
     const setIsActive = useSideBar(state => state.setIsActive);
+    const urlimg = user.avatarurl != "" ? "http://localhost:3333/" + user.avatarurl : "/avatarui.png";
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -47,7 +48,12 @@ export function Header() {
                 </div>
 
                 <div ref={containerRef} className={styles.containerAvatar} onClick={handlePerfilOption} >
-                    <Image src={user?.avatarurl ? "http://localhost:3333/"+user.avatarurl :"/avatarui.png"} fill alt={""}></Image>
+                    <Image
+                        src={urlimg}
+                        fill
+                        alt={""}
+                        sizes="(max-width: 768px) 100vw"
+                    ></Image>
                     {IsOption &&
                         <PerfilOption></PerfilOption>
                     }

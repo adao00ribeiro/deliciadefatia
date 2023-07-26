@@ -119,7 +119,7 @@ export function CadastrarProduto() {
                     onChange={handleSelecionarOpcao}
                     required
                 >
-                    {categorys.map((item, index) => {
+                    {categorys && categorys.map((item, index) => {
                         return <option key={index} value={item['id']}>{item['name']}</option>
                     })}
 

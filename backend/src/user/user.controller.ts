@@ -46,13 +46,18 @@ export class UserController {
     })
   }))
   async update(
-    @Param('id') id: string, 
+    @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
     @UploadedFile() file: Express.Multer.File
-    ) {
+  ) {
+    let user;
+    if (file) {
       const { originalname, filename: avatarurl } = file;
+      user = { ...updateUserDto, avatarurl: avatarurl }
+    } else {
+      user = { ...updateUserDto }
+    }
 
-      const user = { ...updateUserDto, avatarurl: avatarurl }
     try {
       return await this.userService.update(id, user);
     } catch (error) {

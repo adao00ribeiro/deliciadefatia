@@ -1,6 +1,6 @@
 import Router from "next/router";
 import { destroyCookie } from "nookies";
-
+import { } from 'zustand/middleware'
 export default () => {
     try {
         destroyCookie(undefined, '@nextauth.token')

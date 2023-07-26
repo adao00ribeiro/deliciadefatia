@@ -1,11 +1,10 @@
 import { setCookie } from "nookies";
 import { SignInProps } from "../../interfaces/SignInProps";
-import { api } from "../apiClient";
 import Router from "next/router";
 import { toast } from "react-toastify"
-import useUser from "../../Store/useUser";
+import { useApi } from "../../hooks/useApi";
 export async function SignIn({ email, password }: SignInProps, setToken: (token) => void) {
-
+    const api = useApi();
     try {
         const response = await api.post('/auth/login', {
             email,
