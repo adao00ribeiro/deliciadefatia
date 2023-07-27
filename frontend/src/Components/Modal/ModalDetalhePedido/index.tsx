@@ -4,6 +4,7 @@ import { RiCloseFill } from 'react-icons/ri'
 import Image from "next/image"
 import Button from "../../ui/Button"
 import { IOrder } from "../../../interfaces/IOrder"
+import UpdateOrder from "../../../services/funcoes/UpdateOrder"
 
 interface IModalDetalhePedido {
 
@@ -14,7 +15,12 @@ interface IModalDetalhePedido {
 
 export function ModalDetalhePedido(props: IModalDetalhePedido) {
 
-
+    const handleConcluirPedido = async ()=>{
+        await UpdateOrder({
+            ...props.order,
+            status : true
+        });
+    }
     return (
         <dialog id="dialogDetalheProcesso" className={styles.modal} open={props.IsOpen}>
             <div className={styles.containerModal}>
@@ -48,7 +54,7 @@ export function ModalDetalhePedido(props: IModalDetalhePedido) {
                         })
                     }
                 </div>
-                <Button>Concluir Pedido</Button>
+                <Button onClick={handleConcluirPedido}>Concluir Pedido</Button>
             </div>
         </dialog>
     )
